@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="MIT License"
+
+[[mods]]
+    modId="thecomfortzone"
+    version="${file.jarVersion}"
+    displayName="The Comfort Zone"
+    logoFile="ur_mom.png"
+    credits="Sarinsa (Coding), Frenderman (Art)"
+    authors="Frenderman"
+    description="We have pillows"
+
+[[dependencies.thecomfortzone]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.thecomfortzone]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="BOTH"
