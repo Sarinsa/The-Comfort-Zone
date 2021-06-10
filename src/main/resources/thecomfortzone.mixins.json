@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.frenderman.tcz.common.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "minVersion": "0.8",
+  "refmap": "thecomfortzone.mixins.refmap.json",
+  "mixins": [
+    "CatLieOnBedGoalMixin"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
