@@ -1,0 +1,8 @@
+{
+  "parent": "thecomfortzone:block/pillow",
+  "textures": {
+    "side": "thecomfortzone:block/pink_pillow",
+    "bottom": "thecomfortzone:block/pink_pillow_bottom",
+    "top": "thecomfortzone:block/pink_pillow_top"
+  }
+}

@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 public class TheComfortZone {
 
     public static final String MODID = "thecomfortzone";
-    private static final Logger LOGGER = LogManager.getLogger(MODID);
+    public static final Logger LOGGER = LogManager.getLogger(MODID);
 
     public TheComfortZone() {
         // Class loading

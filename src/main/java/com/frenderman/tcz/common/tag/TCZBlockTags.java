@@ -13,5 +13,7 @@ public class TCZBlockTags {
         return BlockTags.bind(TheComfortZone.resourceLoc(name).toString());
     }
 
-    public static void init() {}
+    public static void init() {
+        TCZItemTags.init();
+    }
 }

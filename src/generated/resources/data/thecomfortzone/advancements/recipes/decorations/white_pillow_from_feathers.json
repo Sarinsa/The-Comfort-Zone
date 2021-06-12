@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "thecomfortzone:white_pillow_from_feathers"
+    ]
+  },
+  "criteria": {
+    "has_feathers": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:feathers"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "thecomfortzone:white_pillow_from_feathers"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_feathers",
+      "has_the_recipe"
+    ]
+  ]
+}
