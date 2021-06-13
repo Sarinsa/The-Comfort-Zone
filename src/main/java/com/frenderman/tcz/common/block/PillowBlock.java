@@ -1,13 +1,21 @@
 package com.frenderman.tcz.common.block;
 
-import net.minecraft.block.*;
+import com.frenderman.tcz.common.entity.RideableDummyEntity;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.CatEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.PathType;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.vector.Vector3d;
@@ -26,6 +34,26 @@ public class PillowBlock extends Block {
     @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext selectionContext) {
         return SHAPE;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult result) {
+        if (!playerEntity.isPassenger() && !playerEntity.isCrouching() && world.isEmptyBlock(pos.above()) && this.canSpawnRideable(world, pos)) {
+            RideableDummyEntity entity = new RideableDummyEntity(world, pos.getX() + 0.5D, pos.getY() + (9.0D / 16.D), pos.getZ() + 0.5D, playerEntity);
+            world.addFreshEntity(entity);
+            return ActionResultType.sidedSuccess(world.isClientSide);
+        }
+        return ActionResultType.PASS;
+    }
+
+    /**
+     * @return True if there are no rideable dummy entities
+     *         at the given BlockPos.
+     */
+    private boolean canSpawnRideable(World world, BlockPos pos) {
+        AxisAlignedBB box = new AxisAlignedBB(pos);
+        return world.getEntitiesOfClass(RideableDummyEntity.class, box).isEmpty();
     }
 
     @Override

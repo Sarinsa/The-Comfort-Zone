@@ -4,9 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "minVersion": "0.8",
   "refmap": "thecomfortzone.mixins.refmap.json",
-  "mixins": [
-    "CatLieOnBedGoalMixin"
-  ],
+  "mixins": [],
   "client": [],
   "server": [],
   "injectors": {
