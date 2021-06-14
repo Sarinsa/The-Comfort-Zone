@@ -22,6 +22,8 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class PillowBlock extends Block {
 
     private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
@@ -40,8 +42,11 @@ public class PillowBlock extends Block {
     @SuppressWarnings("deprecation")
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult result) {
         if (!playerEntity.isPassenger() && !playerEntity.isCrouching() && world.isEmptyBlock(pos.above()) && this.canSpawnRideable(world, pos)) {
-            RideableDummyEntity entity = new RideableDummyEntity(world, pos.getX() + 0.5D, pos.getY() + (9.0D / 16.D), pos.getZ() + 0.5D, playerEntity);
-            world.addFreshEntity(entity);
+            if (!world.isClientSide) {
+                RideableDummyEntity entity = new RideableDummyEntity(world, pos.getX() + 0.5D, pos.getY() + (6.0D / 16.D), pos.getZ() + 0.5D);
+                world.addFreshEntity(entity);
+                playerEntity.startRiding(entity);
+            }
             return ActionResultType.sidedSuccess(world.isClientSide);
         }
         return ActionResultType.PASS;
@@ -82,6 +87,13 @@ public class PillowBlock extends Block {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
+    public void onRemove(BlockState state, World world, BlockPos pos, BlockState neighbor, boolean p_196243_5_) {
+        world.updateNeighbourForOutputSignal(pos, this);
+        super.onRemove(state, world, pos, neighbor, p_196243_5_);
+    }
+
+    @Override
     public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
         return 60;
     }
@@ -95,5 +107,26 @@ public class PillowBlock extends Block {
     @SuppressWarnings("deprecation")
     public boolean isPathfindable(BlockState state, IBlockReader world, BlockPos pos, PathType pathType) {
         return false;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public int getAnalogOutputSignal(BlockState state, World world, BlockPos pos) {
+        List<RideableDummyEntity> entities = world.getEntitiesOfClass(RideableDummyEntity.class, new AxisAlignedBB(pos));
+
+        if (!entities.isEmpty()) {
+            for (RideableDummyEntity dummyEntity : entities) {
+                if (!dummyEntity.getPassengers().isEmpty()) {
+                    return 1;
+                }
+            }
+        }
+        return 0;
     }
 }
