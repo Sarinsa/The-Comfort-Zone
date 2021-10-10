@@ -1,9 +1,10 @@
 package com.frenderman.tcz.common.core.register;
 
 import com.frenderman.tcz.common.block.PillowBlock;
+import com.frenderman.tcz.common.block.TableBlock;
 import com.frenderman.tcz.common.core.TheComfortZone;
+import com.frenderman.tcz.common.item.PillowBlockItem;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
@@ -33,14 +34,20 @@ public class TCZBlocks {
     public static final RegistryObject<Block> WHITE_PILLOW = registerPillow("white_pillow");
     public static final RegistryObject<Block> YELLOW_PILLOW = registerPillow("yellow_pillow");
 
+    public static final RegistryObject<Block> OAK_TABLE = registerTable("oak_table");
+
 
     private static RegistryObject<Block> registerPillow(String name) {
         return registerBlock(name, PillowBlock::new, ItemGroup.TAB_DECORATIONS);
     }
 
+    private static RegistryObject<Block> registerTable(String name) {
+        return registerBlock(name, TableBlock::new, ItemGroup.TAB_DECORATIONS);
+    }
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier, ItemGroup itemGroup) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
-        TCZItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(itemGroup)));
+        TCZItems.ITEMS.register(name, () -> new PillowBlockItem(block.get(), new Item.Properties().tab(itemGroup)));
         return block;
     }
 }

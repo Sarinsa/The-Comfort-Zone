@@ -1,6 +1,8 @@
 package com.frenderman.tcz.common.block;
 
+import com.frenderman.tcz.common.core.register.TCZParticles;
 import com.frenderman.tcz.common.entity.RideableDummyEntity;
+import com.frenderman.tcz.common.particle.PillowFeatherParticleData;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,8 +21,10 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.List;
 
@@ -29,7 +33,9 @@ public class PillowBlock extends Block {
     private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
 
     public PillowBlock() {
-        super(AbstractBlock.Properties.of(Material.WOOL).sound(SoundType.WOOL).strength(0.4F, 0.1F));
+        super(AbstractBlock.Properties.of(Material.WOOL)
+                .sound(SoundType.WOOL)
+                .strength(0.4F, 0.1F));
     }
 
     @Override
@@ -68,6 +74,13 @@ public class PillowBlock extends Block {
         }
         else {
             entity.causeFallDamage(fallDistance, 0.0F);
+        }
+
+        if (fallDistance > 8.0F) {
+            if (!world.isClientSide) {
+                ServerWorld serverWorld = (ServerWorld) world;
+                serverWorld.sendParticles(new PillowFeatherParticleData(fallDistance), pos.getX() + 0.5D, pos.getY() + 0.65D, pos.getZ() + 0.5D, 1, 0, 0, 0, 0);
+            }
         }
     }
 
@@ -113,6 +126,15 @@ public class PillowBlock extends Block {
     @SuppressWarnings("deprecation")
     public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
+    }
+
+    public void onBlockExploded(BlockState state, World world, BlockPos pos, Explosion explosion) {
+        super.onBlockExploded(state, world, pos, explosion);
+
+        if (world instanceof ServerWorld) {
+            ServerWorld serverWorld = (ServerWorld) world;
+            serverWorld.sendParticles(TCZParticles.PILLOW_FEATHER_POOF.get(), pos.getX() + 0.5D, pos.getY() + 0.65D, pos.getZ() + 0.5D, 1, 0, 0, 0, 0);
+        }
     }
 
     @Override

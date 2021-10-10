@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "table_type=single": {
+      "model": "thecomfortzone:block/single_oak_table"
+    },
+    "table_type=left": {
+      "model": "thecomfortzone:block/oak_table_left"
+    },
+    "table_type=right": {
+      "model": "thecomfortzone:block/oak_table_right"
+    },
+    "table_type=bottom_left": {
+      "model": "thecomfortzone:block/oak_table_bl"
+    },
+    "table_type=bottom_middle": {
+      "model": "thecomfortzone:block/oak_table_bm"
+    },
+    "table_type=bottom_right": {
+      "model": "thecomfortzone:block/oak_table_br"
+    },
+    "table_type=middle_left": {
+      "model": "thecomfortzone:block/oak_table_ml"
+    },
+    "table_type=middle_middle": {
+      "model": "thecomfortzone:block/oak_table_mm"
+    },
+    "table_type=middle_right": {
+      "model": "thecomfortzone:block/oak_table_mr"
+    },
+    "table_type=top_left": {
+      "model": "thecomfortzone:block/oak_table_tl"
+    },
+    "table_type=top_middle": {
+      "model": "thecomfortzone:block/oak_table_tm"
+    },
+    "table_type=top_right": {
+      "model": "thecomfortzone:block/oak_table_tr"
+    }
+  }
+}

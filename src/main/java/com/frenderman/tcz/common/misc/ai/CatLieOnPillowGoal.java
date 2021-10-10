@@ -23,29 +23,34 @@ public class CatLieOnPillowGoal<T extends CatEntity> extends MoveToBlockGoal {
         this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
     }
 
-    public boolean canUse() {
-        return this.cat.isTame() && !this.cat.isOrderedToSit() && !this.cat.isLying() && !this.isFarAwayFromOwner(this.cat) && super.canUse();
-    }
-
-    public void start() {
-        super.start();
-        this.cat.setInSittingPose(false);
-    }
-
     private boolean isFarAwayFromOwner(T cat) {
         Entity owner = cat.getOwner();
         return owner != null && this.cat.distanceToSqr(owner) > 100.0D;
     }
 
+    @Override
+    public boolean canUse() {
+        return this.cat.isTame() && !this.cat.isLying() && !this.isFarAwayFromOwner(this.cat) && super.canUse();
+    }
+
+    @Override
+    public void start() {
+        super.start();
+        this.cat.setInSittingPose(false);
+    }
+
+    @Override
     protected int nextStartTick(CreatureEntity creatureEntity) {
         return 40;
     }
 
+    @Override
     public void stop() {
         super.stop();
         this.cat.setLying(false);
     }
 
+    @Override
     public void tick() {
         super.tick();
 
@@ -59,6 +64,7 @@ public class CatLieOnPillowGoal<T extends CatEntity> extends MoveToBlockGoal {
         }
     }
 
+    @Override
     protected boolean isValidTarget(IWorldReader worldReader, BlockPos pos) {
         if (worldReader instanceof World) {
             World world = (World) worldReader;

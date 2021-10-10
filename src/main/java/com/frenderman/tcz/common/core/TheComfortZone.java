@@ -3,6 +3,7 @@ package com.frenderman.tcz.common.core;
 import com.frenderman.tcz.common.core.register.TCZBlocks;
 import com.frenderman.tcz.common.core.register.TCZEntities;
 import com.frenderman.tcz.common.core.register.TCZItems;
+import com.frenderman.tcz.common.core.register.TCZParticles;
 import com.frenderman.tcz.common.event.EntityEvents;
 import com.frenderman.tcz.common.tag.TCZBlockTags;
 import net.minecraft.util.ResourceLocation;
@@ -33,6 +34,7 @@ public class TheComfortZone {
         TCZBlocks.BLOCKS.register(eventBus);
         TCZItems.ITEMS.register(eventBus);
         TCZEntities.ENTITIES.register(eventBus);
+        TCZParticles.PARTICLES.register(eventBus);
     }
 
     private void onCommonSetup(FMLCommonSetupEvent event) {
