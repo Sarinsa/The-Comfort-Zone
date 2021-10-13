@@ -8,9 +8,13 @@ import java.util.Random;
 
 public class PillowFeatherParticle extends SpriteTexturedParticle {
 
+    private float rotSpeed;
+    private final double gravity = -0.05D;
+
     public PillowFeatherParticle(ClientWorld clientWorld, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, IAnimatedSprite sprite) {
         super(clientWorld, x, y, z, xSpeed, ySpeed, zSpeed);
         Random random = clientWorld.random;
+        this.rotSpeed = ((float)Math.random() - 0.5F) * 0.1F;
 
         this.setSprite(sprite.get(random));
         this.setLifetime(55 + random.nextInt(30));
@@ -18,7 +22,7 @@ public class PillowFeatherParticle extends SpriteTexturedParticle {
 
     @Override
     public IParticleRenderType getRenderType() {
-        return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
+        return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     @Override
@@ -32,15 +36,32 @@ public class PillowFeatherParticle extends SpriteTexturedParticle {
         }
         else {
             this.move(this.xd, this.yd, this.zd);
-            this.xd *= 0.95F;
-            this.yd *= 0.95F;
-            this.zd *= 0.95F;
+            this.xd *= 0.96F;
+            this.yd *= 0.96F;
+            this.zd *= 0.96F;
+
+            this.oRoll = this.roll;
+            this.roll += (float)Math.PI * this.rotSpeed * 2.0F;
+
+            this.rotSpeed *= 0.98F;
 
             if (this.onGround) {
-                this.xd *= 0.4F;
-                this.zd *= 0.4F;
+                this.oRoll = this.roll = 0.0F;
             }
         }
+        if (this.yd > this.gravity) {
+            this.yd -= 0.002D;
+        }
+        else if (this.yd < this.gravity) {
+            this.yd += 0.002D;
+        }
+
+        this.subtractAlpha();
+    }
+
+    public void subtractAlpha() {
+        double alpha = (1 - ((double)age / (double)lifetime));
+        this.alpha = (float) alpha;
     }
 
     public static class Factory implements IParticleFactory<BasicParticleType> {
