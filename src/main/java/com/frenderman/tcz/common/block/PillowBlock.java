@@ -38,6 +38,10 @@ public class PillowBlock extends Block {
                 .strength(0.4F, 0.1F));
     }
 
+    public PillowBlock(AbstractBlock.Properties properties) {
+        super(properties);
+    }
+
     @Override
     @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext selectionContext) {

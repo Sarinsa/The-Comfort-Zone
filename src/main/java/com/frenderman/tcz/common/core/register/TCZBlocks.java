@@ -1,10 +1,12 @@
 package com.frenderman.tcz.common.core.register;
 
 import com.frenderman.tcz.common.block.PillowBlock;
+import com.frenderman.tcz.common.block.StoolBlock;
 import com.frenderman.tcz.common.block.TableBlock;
 import com.frenderman.tcz.common.core.TheComfortZone;
 import com.frenderman.tcz.common.item.PillowBlockItem;
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
@@ -34,11 +36,34 @@ public class TCZBlocks {
     public static final RegistryObject<Block> WHITE_PILLOW = registerPillow("white_pillow");
     public static final RegistryObject<Block> YELLOW_PILLOW = registerPillow("yellow_pillow");
 
-    public static final RegistryObject<Block> OAK_TABLE = registerTable("oak_table");
+    public static final RegistryObject<Block> BLACK_OAK_STOOL = registerStool("black_oak_stool");
+    public static final RegistryObject<Block> BLUE_OAK_STOOL= registerStool("blue_oak_stool");
+    public static final RegistryObject<Block> BROWN_OAK_STOOL = registerStool("brown_oak_stool");
+    public static final RegistryObject<Block> CYAN_OAK_STOOL = registerStool("cyan_oak_stool");
+    public static final RegistryObject<Block> GRAY_OAK_STOOL = registerStool("gray_oak_stool");
+    public static final RegistryObject<Block> GREEN_OAK_STOOL = registerStool("green_oak_stool");
+    public static final RegistryObject<Block> LIGHT_BLUE_OAK_STOOL = registerStool("light_blue_oak_stool");
+    public static final RegistryObject<Block> LIGHT_GRAY_OAK_STOOL = registerStool("light_gray_oak_stool");
+    public static final RegistryObject<Block> LIME_OAK_STOOL = registerStool("lime_oak_stool");
+    public static final RegistryObject<Block> MAGENTA_OAK_STOOL = registerStool("magenta_oak_stool");
+    public static final RegistryObject<Block> ORANGE_OAK_STOOL = registerStool("orange_oak_stool");
+    public static final RegistryObject<Block> PINK_OAK_STOOL = registerStool("pink_oak_stool");
+    public static final RegistryObject<Block> PURPLE_OAK_STOOL = registerStool("purple_oak_stool");
+    public static final RegistryObject<Block> RED_OAK_STOOL = registerStool("red_oak_stool");
+    public static final RegistryObject<Block> WHITE_OAK_STOOL = registerStool("white_oak_stool");
+    public static final RegistryObject<Block> YELLOW_OAK_STOOL = registerStool("yellow_oak_stool");
+
+    //public static final RegistryObject<Block> OAK_TABLE = registerTable("oak_table");
 
 
     private static RegistryObject<Block> registerPillow(String name) {
-        return registerBlock(name, PillowBlock::new, ItemGroup.TAB_DECORATIONS);
+        RegistryObject<Block> block = BLOCKS.register(name, PillowBlock::new);
+        TCZItems.ITEMS.register(name, () -> new PillowBlockItem(block.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+        return block;
+    }
+
+    private static RegistryObject<Block> registerStool(String name) {
+        return registerBlock(name, StoolBlock::new, ItemGroup.TAB_DECORATIONS);
     }
 
     private static RegistryObject<Block> registerTable(String name) {
@@ -47,7 +72,7 @@ public class TCZBlocks {
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier, ItemGroup itemGroup) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
-        TCZItems.ITEMS.register(name, () -> new PillowBlockItem(block.get(), new Item.Properties().tab(itemGroup)));
+        TCZItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(itemGroup)));
         return block;
     }
 }

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "thecomfortzone:stools",
+  "pattern": [
+    "P",
+    "S"
+  ],
+  "key": {
+    "P": {
+      "item": "thecomfortzone:red_pillow"
+    },
+    "S": {
+      "item": "minecraft:oak_slab"
+    }
+  },
+  "result": {
+    "item": "thecomfortzone:red_oak_stool"
+  }
+}

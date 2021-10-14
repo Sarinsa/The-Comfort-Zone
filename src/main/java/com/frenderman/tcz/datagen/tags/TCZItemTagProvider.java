@@ -19,5 +19,6 @@ public class TCZItemTagProvider extends ItemTagsProvider {
     @Override
     protected void addTags() {
         this.copy(TCZBlockTags.PILLOWS, TCZItemTags.PILLOWS);
+        this.copy(TCZBlockTags.STOOLS, TCZItemTags.STOOLS);
     }
 }

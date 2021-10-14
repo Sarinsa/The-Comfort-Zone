@@ -1,5 +1,6 @@
 package com.frenderman.tcz.common.core;
 
+import com.frenderman.tcz.common.core.config.TCZCommonConfig;
 import com.frenderman.tcz.common.core.register.TCZBlocks;
 import com.frenderman.tcz.common.core.register.TCZEntities;
 import com.frenderman.tcz.common.core.register.TCZItems;
@@ -9,7 +10,9 @@ import com.frenderman.tcz.common.tag.TCZBlockTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -35,6 +38,9 @@ public class TheComfortZone {
         TCZItems.ITEMS.register(eventBus);
         TCZEntities.ENTITIES.register(eventBus);
         TCZParticles.PARTICLES.register(eventBus);
+
+        ModLoadingContext context = ModLoadingContext.get();
+        context.registerConfig(ModConfig.Type.COMMON, TCZCommonConfig.COMMON_SPEC);
     }
 
     private void onCommonSetup(FMLCommonSetupEvent event) {

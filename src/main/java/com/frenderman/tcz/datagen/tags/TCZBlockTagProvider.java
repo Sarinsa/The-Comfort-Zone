@@ -5,9 +5,10 @@ import com.frenderman.tcz.common.tag.TCZBlockTags;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import static com.frenderman.tcz.common.core.register.TCZBlocks.*;
 
 import javax.annotation.Nullable;
+
+import static com.frenderman.tcz.common.core.register.TCZBlocks.*;
 
 public class TCZBlockTagProvider extends BlockTagsProvider {
 
@@ -35,5 +36,27 @@ public class TCZBlockTagProvider extends BlockTagsProvider {
                 WHITE_PILLOW.get(),
                 YELLOW_PILLOW.get()
         );
+
+        this.tag(TCZBlockTags.STOOLS).add(
+                BLACK_OAK_STOOL.get(),
+                BLUE_OAK_STOOL.get(),
+                BROWN_OAK_STOOL.get(),
+                CYAN_OAK_STOOL.get(),
+                GRAY_OAK_STOOL.get(),
+                GREEN_OAK_STOOL.get(),
+                LIGHT_BLUE_OAK_STOOL.get(),
+                LIGHT_GRAY_OAK_STOOL.get(),
+                LIME_OAK_STOOL.get(),
+                MAGENTA_OAK_STOOL.get(),
+                ORANGE_OAK_STOOL.get(),
+                PINK_OAK_STOOL.get(),
+                PURPLE_OAK_STOOL.get(),
+                RED_OAK_STOOL.get(),
+                WHITE_OAK_STOOL.get(),
+                YELLOW_OAK_STOOL.get()
+        );
+
+        this.tag(TCZBlockTags.SITTABLES).addTag(TCZBlockTags.PILLOWS);
+        this.tag(TCZBlockTags.PILLOWS).addTag(TCZBlockTags.STOOLS);
     }
 }

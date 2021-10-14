@@ -20,9 +20,9 @@ public class PillowBlockItem extends BlockItem {
 
     public PillowBlockItem(Block block, Properties properties) {
         super(block, properties);
-        this.defaultModifiers = ImmutableMultimap.<Attribute, AttributeModifier>builder()
-                .put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(TCZ_KNOCKBACK_UUID, "Pillow modifier", 5.0D, AttributeModifier.Operation.ADDITION))
-                .build();
+        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+        builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(TCZ_KNOCKBACK_UUID, "Pillow modifier", 5.0D, AttributeModifier.Operation.ADDITION));
+        this.defaultModifiers = builder.build();
     }
 
     @Override

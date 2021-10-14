@@ -7,7 +7,7 @@ license="MIT License"
     version="${file.jarVersion}"
     displayName="The Comfort Zone"
     logoFile="ur_mom.png"
-    credits="Sarinsa (Coding), Frenderman (Art)"
+    credits="Sarinsa (Coding), Frenderman (Art and concepts)"
     authors="Frenderman"
     description="We have pillows"
 

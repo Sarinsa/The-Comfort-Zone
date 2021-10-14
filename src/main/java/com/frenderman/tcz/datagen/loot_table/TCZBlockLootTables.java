@@ -6,6 +6,7 @@ import net.minecraft.loot.LootTable;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import static com.frenderman.tcz.common.core.register.TCZBlocks.*;
 
 public class TCZBlockLootTables extends BlockLootTables {
@@ -41,5 +42,22 @@ public class TCZBlockLootTables extends BlockLootTables {
         this.dropSelf(RED_PILLOW.get());
         this.dropSelf(WHITE_PILLOW.get());
         this.dropSelf(YELLOW_PILLOW.get());
+
+        this.dropSelf(BLACK_OAK_STOOL.get());
+        this.dropSelf(BLUE_OAK_STOOL.get());
+        this.dropSelf(BROWN_OAK_STOOL.get());
+        this.dropSelf(CYAN_OAK_STOOL.get());
+        this.dropSelf(GRAY_OAK_STOOL.get());
+        this.dropSelf(GREEN_OAK_STOOL.get());
+        this.dropSelf(LIGHT_BLUE_OAK_STOOL.get());
+        this.dropSelf(LIGHT_GRAY_OAK_STOOL.get());
+        this.dropSelf(LIME_OAK_STOOL.get());
+        this.dropSelf(MAGENTA_OAK_STOOL.get());
+        this.dropSelf(ORANGE_OAK_STOOL.get());
+        this.dropSelf(PINK_OAK_STOOL.get());
+        this.dropSelf(PURPLE_OAK_STOOL.get());
+        this.dropSelf(RED_OAK_STOOL.get());
+        this.dropSelf(WHITE_OAK_STOOL.get());
+        this.dropSelf(YELLOW_OAK_STOOL.get());
     }
 }

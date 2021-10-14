@@ -1,6 +1,5 @@
 package com.frenderman.tcz.common.tile;
 
-import com.frenderman.tcz.common.core.register.TCZTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -13,7 +12,7 @@ public class TableTileEntity extends TileEntity implements ITickableTileEntity {
     private ItemStack stack = ItemStack.EMPTY;
 
     public TableTileEntity() {
-        super(TCZTileEntities.TABLE.get());
+        super(/*TCZTileEntities.TABLE.get() */ null);
     }
 
     @Override

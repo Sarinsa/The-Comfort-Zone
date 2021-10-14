@@ -2,6 +2,7 @@ package com.frenderman.tcz.datagen;
 
 import com.frenderman.tcz.common.core.TheComfortZone;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -9,6 +10,7 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+
 import static com.frenderman.tcz.common.core.register.TCZBlocks.*;
 
 public class TCZBlockStateProvider extends BlockStateProvider {
@@ -35,6 +37,23 @@ public class TCZBlockStateProvider extends BlockStateProvider {
         this.pillowBlock(RED_PILLOW.get());
         this.pillowBlock(WHITE_PILLOW.get());
         this.pillowBlock(YELLOW_PILLOW.get());
+
+        this.stoolBlock(BLACK_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(BLUE_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(BROWN_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(CYAN_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(GRAY_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(GREEN_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(LIGHT_BLUE_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(LIGHT_GRAY_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(LIME_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(MAGENTA_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(ORANGE_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(PINK_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(PURPLE_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(RED_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(WHITE_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+        this.stoolBlock(YELLOW_OAK_STOOL.get(), Blocks.OAK_PLANKS);
     }
 
     private String name(Block block) {
@@ -43,6 +62,10 @@ public class TCZBlockStateProvider extends BlockStateProvider {
 
     private ResourceLocation texture(String path) {
         return new ResourceLocation(TheComfortZone.MODID, ModelProvider.BLOCK_FOLDER + "/" + path);
+    }
+
+    private ResourceLocation vanillaTexture(String path) {
+        return new ResourceLocation(ModelProvider.BLOCK_FOLDER + "/" + path);
     }
 
     private void pillowBlock(Block pillowBlock) {
@@ -57,5 +80,30 @@ public class TCZBlockStateProvider extends BlockStateProvider {
                         .modelFile(model)
                         .build());
         simpleBlockItem(pillowBlock, model);
+    }
+
+    private void stoolBlock(Block stoolBlock, Block planks) {
+        try {
+            String name = stoolBlock.getBlock().getRegistryName().getPath();
+            String planksName = planks.getRegistryName().getPath();
+            String plankWoodName = planksName.split("_")[0];
+            String topName = name.split(plankWoodName)[0];
+
+            ModelFile model = models().withExistingParent(name(stoolBlock), TheComfortZone.MODID + ":block/stool_template")
+                    .texture("side", texture(name + "_side"))
+                    .texture("bottom", texture(plankWoodName + "_stool_bottom"))
+                    .texture("top", texture(topName + "stool_top"))
+                    .texture("planks", vanillaTexture(planksName));
+
+
+            getVariantBuilder(stoolBlock)
+                    .forAllStates((state) -> ConfiguredModel.builder()
+                            .modelFile(model)
+                            .build());
+            simpleBlockItem(stoolBlock, model);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

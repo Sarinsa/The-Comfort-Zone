@@ -24,16 +24,23 @@ public class RideableDummyEntity extends Entity {
      */
     private boolean shouldBeRemoved;
 
+    private double yDismountOffset;
+
     public RideableDummyEntity(EntityType<?> entityType, World world) {
         super(entityType, world);
     }
 
     public RideableDummyEntity(World world, double x, double y, double z) {
+        this(world, x, y, z, 0.45D);
+    }
+
+    public RideableDummyEntity(World world, double x, double y, double z, double yDismountOffset) {
         this(TCZEntities.RIDEABLE_DUMMY_ENTITY.get(), world);
         this.setPos(x, y, z);
         this.blocksBuilding = false;
         this.shouldBeRemoved = false;
         this.gracePeriod = 10;
+        this.yDismountOffset = yDismountOffset;
     }
 
     @Override
@@ -54,11 +61,11 @@ public class RideableDummyEntity extends Entity {
 
     @Override
     public Vector3d getDismountLocationForPassenger(LivingEntity livingEntity) {
-        return new Vector3d(this.getX(), this.getBoundingBox().maxY + 0.45D, this.getZ());
+        return new Vector3d(this.getX(), this.getBoundingBox().maxY + this.yDismountOffset, this.getZ());
     }
 
     private boolean validPosition() {
-        return this.level.getBlockState(this.blockPosition()).is(TCZBlockTags.PILLOWS);
+        return this.level.getBlockState(this.blockPosition()).is(TCZBlockTags.SITTABLES);
     }
 
     @Override
