@@ -2,14 +2,14 @@ package com.frenderman.tcz.common.entity;
 
 import com.frenderman.tcz.common.core.register.TCZEntities;
 import com.frenderman.tcz.common.tag.TCZBlockTags;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.NetworkHooks;
 
 public class RideableDummyEntity extends Entity {
 
@@ -26,16 +26,16 @@ public class RideableDummyEntity extends Entity {
 
     private double yDismountOffset;
 
-    public RideableDummyEntity(EntityType<?> entityType, World world) {
-        super(entityType, world);
+    public RideableDummyEntity(EntityType<?> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public RideableDummyEntity(World world, double x, double y, double z) {
-        this(world, x, y, z, 0.45D);
+    public RideableDummyEntity(Level level, double x, double y, double z) {
+        this(level, x, y, z, 0.45D);
     }
 
-    public RideableDummyEntity(World world, double x, double y, double z, double yDismountOffset) {
-        this(TCZEntities.RIDEABLE_DUMMY_ENTITY.get(), world);
+    public RideableDummyEntity(Level level, double x, double y, double z, double yDismountOffset) {
+        this(TCZEntities.RIDEABLE_DUMMY_ENTITY.get(), level);
         this.setPos(x, y, z);
         this.blocksBuilding = false;
         this.shouldBeRemoved = false;
@@ -49,7 +49,7 @@ public class RideableDummyEntity extends Entity {
 
         if (!this.level.isClientSide) {
             if ((this.getPassengers().isEmpty() && this.gracePeriod <= 0) || !this.validPosition() || this.shouldBeRemoved) {
-                this.remove();
+                this.discard();
             }
         }
     }
@@ -60,8 +60,8 @@ public class RideableDummyEntity extends Entity {
     }
 
     @Override
-    public Vector3d getDismountLocationForPassenger(LivingEntity livingEntity) {
-        return new Vector3d(this.getX(), this.getBoundingBox().maxY + this.yDismountOffset, this.getZ());
+    public Vec3 getDismountLocationForPassenger(LivingEntity livingEntity) {
+        return new Vec3(this.getX(), this.getBoundingBox().maxY + this.yDismountOffset, this.getZ());
     }
 
     private boolean validPosition() {
@@ -74,12 +74,12 @@ public class RideableDummyEntity extends Entity {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundNBT compoundNBT) {
+    protected void readAdditionalSaveData(CompoundTag compoundTag) {
 
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundNBT compoundNBT) {
+    protected void addAdditionalSaveData(CompoundTag compoundTag) {
 
     }
 
@@ -101,7 +101,7 @@ public class RideableDummyEntity extends Entity {
     }
 
     @Override
-    public IPacket<?> getAddEntityPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

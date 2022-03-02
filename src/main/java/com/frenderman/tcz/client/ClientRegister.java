@@ -8,11 +8,11 @@ import com.frenderman.tcz.common.core.TheComfortZone;
 import com.frenderman.tcz.common.core.register.TCZEntities;
 import com.frenderman.tcz.common.core.register.TCZParticles;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.client.particle.ParticleEngine;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -21,19 +21,20 @@ public class ClientRegister {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        registerEntityRenderers();
+
     }
 
-    private static void registerEntityRenderers() {
-        RenderingRegistry.registerEntityRenderingHandler(TCZEntities.RIDEABLE_DUMMY_ENTITY.get(), NoRenderer::new);
+    @SubscribeEvent
+    private static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(TCZEntities.RIDEABLE_DUMMY_ENTITY.get(), NoRenderer::new);
     }
 
     @SubscribeEvent
     public static void registerParticleFactories(ParticleFactoryRegisterEvent event) {
-        ParticleManager particleManager = Minecraft.getInstance().particleEngine;
+        ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
 
-        particleManager.register(TCZParticles.PILLOW_FEATHER.get(), PillowFeatherParticle.Factory::new);
-        particleManager.register(TCZParticles.PILLOW_FEATHER_POOF.get(), new PillowFeatherExplosionParticle.Factory());
-        particleManager.register(TCZParticles.PILLOW_FEATHER_IMPACT.get(), new PillowFeatherImpactParticle.Factory());
+        particleEngine.register(TCZParticles.PILLOW_FEATHER.get(), PillowFeatherParticle.Provider::new);
+        particleEngine.register(TCZParticles.PILLOW_FEATHER_POOF.get(), new PillowFeatherExplosionParticle.Provider());
+        particleEngine.register(TCZParticles.PILLOW_FEATHER_IMPACT.get(), new PillowFeatherImpactParticle.Provider());
     }
 }

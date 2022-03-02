@@ -1,19 +1,19 @@
 package com.frenderman.tcz.common.misc.ai;
 
 import com.frenderman.tcz.common.tag.TCZBlockTags;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.MoveToBlockGoal;
-import net.minecraft.entity.passive.CatEntity;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
+import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.phys.AABB;
 
 import java.util.EnumSet;
 
-public class CatLieOnPillowGoal<T extends CatEntity> extends MoveToBlockGoal {
+public class CatLieOnPillowGoal<T extends Cat> extends MoveToBlockGoal {
 
     private final T cat;
 
@@ -40,7 +40,7 @@ public class CatLieOnPillowGoal<T extends CatEntity> extends MoveToBlockGoal {
     }
 
     @Override
-    protected int nextStartTick(CreatureEntity creatureEntity) {
+    protected int nextStartTick(PathfinderMob mob) {
         return 40;
     }
 
@@ -65,12 +65,10 @@ public class CatLieOnPillowGoal<T extends CatEntity> extends MoveToBlockGoal {
     }
 
     @Override
-    protected boolean isValidTarget(IWorldReader worldReader, BlockPos pos) {
-        if (worldReader instanceof World) {
-            World world = (World) worldReader;
-
-            boolean unoccupied = world.getEntities(this.cat, new AxisAlignedBB(pos)).isEmpty();
-            return world.isEmptyBlock(pos.above()) && world.getBlockState(pos).getBlock().is(TCZBlockTags.PILLOWS) && unoccupied;
+    protected boolean isValidTarget(LevelReader levelReader, BlockPos pos) {
+        if (levelReader instanceof Level level) {
+            boolean unoccupied = level.getEntities(this.cat, new AABB(pos)).isEmpty();
+            return level.isEmptyBlock(pos.above()) && level.getBlockState(pos).is(TCZBlockTags.PILLOWS) && unoccupied;
         }
         return false;
     }

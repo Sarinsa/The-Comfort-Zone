@@ -1,28 +1,28 @@
 package com.frenderman.tcz.client.particle;
 
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particles.BasicParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 
 import java.util.Random;
 
-public class PillowFeatherParticle extends SpriteTexturedParticle {
+public class PillowFeatherParticle extends TextureSheetParticle {
 
     private float rotSpeed;
     private final double gravity = -0.05D;
 
-    public PillowFeatherParticle(ClientWorld clientWorld, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, IAnimatedSprite sprite) {
-        super(clientWorld, x, y, z, xSpeed, ySpeed, zSpeed);
-        Random random = clientWorld.random;
+    public PillowFeatherParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, SpriteSet sprites) {
+        super(level, x, y, z, xSpeed, ySpeed, zSpeed);
+        Random random = level.random;
         this.rotSpeed = ((float)Math.random() - 0.5F) * 0.1F;
 
-        this.setSprite(sprite.get(random));
+        this.setSprite(sprites.get(random));
         this.setLifetime(55 + random.nextInt(30));
     }
 
     @Override
-    public IParticleRenderType getRenderType() {
-        return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     @Override
@@ -64,15 +64,15 @@ public class PillowFeatherParticle extends SpriteTexturedParticle {
         this.alpha = (float) alpha;
     }
 
-    public static class Factory implements IParticleFactory<BasicParticleType> {
-        private final IAnimatedSprite sprites;
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet sprites;
 
-        public Factory(IAnimatedSprite animatedSprite) {
+        public Provider(SpriteSet animatedSprite) {
             this.sprites = animatedSprite;
         }
 
-        public Particle createParticle(BasicParticleType basicParticleType, ClientWorld clientWorld, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new PillowFeatherParticle(clientWorld, x, y, z, xSpeed, ySpeed, zSpeed, this.sprites);
+        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            return new PillowFeatherParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, this.sprites);
         }
     }
 }

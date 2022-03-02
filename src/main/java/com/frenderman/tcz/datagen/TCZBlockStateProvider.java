@@ -1,10 +1,9 @@
 package com.frenderman.tcz.datagen;
 
 import com.frenderman.tcz.common.core.TheComfortZone;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -38,6 +37,7 @@ public class TCZBlockStateProvider extends BlockStateProvider {
         this.pillowBlock(WHITE_PILLOW.get());
         this.pillowBlock(YELLOW_PILLOW.get());
 
+        /*
         this.stoolBlock(BLACK_OAK_STOOL.get(), Blocks.OAK_PLANKS);
         this.stoolBlock(BLUE_OAK_STOOL.get(), Blocks.OAK_PLANKS);
         this.stoolBlock(BROWN_OAK_STOOL.get(), Blocks.OAK_PLANKS);
@@ -54,6 +54,8 @@ public class TCZBlockStateProvider extends BlockStateProvider {
         this.stoolBlock(RED_OAK_STOOL.get(), Blocks.OAK_PLANKS);
         this.stoolBlock(WHITE_OAK_STOOL.get(), Blocks.OAK_PLANKS);
         this.stoolBlock(YELLOW_OAK_STOOL.get(), Blocks.OAK_PLANKS);
+
+         */
     }
 
     private String name(Block block) {
@@ -69,7 +71,7 @@ public class TCZBlockStateProvider extends BlockStateProvider {
     }
 
     private void pillowBlock(Block pillowBlock) {
-        String name = pillowBlock.getBlock().getRegistryName().getPath();
+        String name = pillowBlock.getRegistryName().getPath();
         ModelFile model = models().withExistingParent(name(pillowBlock), TheComfortZone.MODID + ":block/pillow")
                 .texture("side", texture(name))
                 .texture("bottom", texture(name + "_bottom"))
@@ -84,7 +86,7 @@ public class TCZBlockStateProvider extends BlockStateProvider {
 
     private void stoolBlock(Block stoolBlock, Block planks) {
         try {
-            String name = stoolBlock.getBlock().getRegistryName().getPath();
+            String name = stoolBlock.getRegistryName().getPath();
             String planksName = planks.getRegistryName().getPath();
             String plankWoodName = planksName.split("_")[0];
             String topName = name.split(plankWoodName)[0];

@@ -2,14 +2,14 @@ package com.frenderman.tcz.client.particle;
 
 import com.frenderman.tcz.common.core.register.TCZParticles;
 import com.frenderman.tcz.common.particle.PillowFeatherParticleData;
-import net.minecraft.client.particle.IParticleFactory;
-import net.minecraft.client.particle.MetaParticle;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.world.ClientWorld;
+import net.minecraft.client.particle.ParticleProvider;
 
 import javax.annotation.Nullable;
 
-public class PillowFeatherImpactParticle extends MetaParticle {
+public class PillowFeatherImpactParticle extends NoRenderParticle {
 
     private int timeSinceStart;
 
@@ -20,8 +20,8 @@ public class PillowFeatherImpactParticle extends MetaParticle {
     private final double ySpeed;
     private final double zSpeed;
 
-    private PillowFeatherImpactParticle(ClientWorld world, PillowFeatherParticleData particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-        super(world, x, y, z, 0.0D, 0.0D, 0.0D);
+    private PillowFeatherImpactParticle(ClientLevel level, PillowFeatherParticleData particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        super(level, x, y, z, 0.0D, 0.0D, 0.0D);
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
         this.zSpeed = zSpeed;
@@ -45,12 +45,12 @@ public class PillowFeatherImpactParticle extends MetaParticle {
         }
     }
 
-    public static class Factory implements IParticleFactory<PillowFeatherParticleData> {
+    public static class Provider implements ParticleProvider<PillowFeatherParticleData> {
 
         @Nullable
         @Override
-        public Particle createParticle(PillowFeatherParticleData particleData, ClientWorld clientWorld, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new PillowFeatherImpactParticle(clientWorld, particleData, x, y, z, xSpeed, ySpeed, zSpeed);
+        public Particle createParticle(PillowFeatherParticleData particleData, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            return new PillowFeatherImpactParticle(level, particleData, x, y, z, xSpeed, ySpeed, zSpeed);
         }
     }
 }

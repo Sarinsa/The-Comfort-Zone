@@ -1,35 +1,60 @@
 package com.frenderman.tcz.common.block;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.IStringSerializable;
-import net.minecraftforge.common.ToolType;
 
-public class TableBlock extends Block {
+import com.frenderman.tcz.common.core.register.TCZBlockEntities;
+import com.frenderman.tcz.common.tile.TableBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.Material;
+
+import javax.annotation.Nullable;
+
+public class TableBlock extends BaseEntityBlock {
 
     public static final EnumProperty<TableType> TABLE_TYPE = EnumProperty.create("table_type", TableType.class);
 
     public TableBlock() {
-        super(AbstractBlock.Properties.of(Material.WOOD)
+        super(BlockBehaviour.Properties.of(Material.WOOD)
                 .sound(SoundType.WOOD)
                 .strength(2.0F, 3.0F)
-                .noOcclusion()
-                .harvestTool(ToolType.AXE));
+                .noOcclusion());
 
         this.registerDefaultState(this.stateDefinition.any().setValue(TABLE_TYPE, TableType.SINGLE));
     }
 
+    @Nullable
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> stateBuilder) {
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new TableBlockEntity(pos, state);
+    }
+
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return createTableTicker(level, blockEntityType, TCZBlockEntities.TABLE.get());
+    }
+
+    @Nullable
+    protected static <T extends BlockEntity> BlockEntityTicker<T> createTableTicker(Level level, BlockEntityType<T> blockEntityTypeA, BlockEntityType<? extends TableBlockEntity> blockEntityTypeB) {
+        return level.isClientSide ? null : createTickerHelper(blockEntityTypeA, blockEntityTypeB, TableBlockEntity::serverTick);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
         stateBuilder.add(TABLE_TYPE);
     }
 
-    public enum TableType implements IStringSerializable {
+    public enum TableType implements StringRepresentable {
         SINGLE("single"),
         LEFT("left"),
         RIGHT("right"),

@@ -7,7 +7,7 @@ import com.frenderman.tcz.common.core.register.TCZItems;
 import com.frenderman.tcz.common.core.register.TCZParticles;
 import com.frenderman.tcz.common.event.EntityEvents;
 import com.frenderman.tcz.common.tag.TCZBlockTags;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;

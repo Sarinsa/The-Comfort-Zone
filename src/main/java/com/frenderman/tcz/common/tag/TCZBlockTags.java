@@ -1,18 +1,18 @@
 package com.frenderman.tcz.common.tag;
 
 import com.frenderman.tcz.common.core.TheComfortZone;
-import net.minecraft.block.Block;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.level.block.Block;
 
 public class TCZBlockTags {
 
-    public static final ITag.INamedTag<Block> SITTABLES = modTag("sittables");
+    public static final Tag.Named<Block> SITTABLES = modTag("sittables");
 
-    public static final ITag.INamedTag<Block> PILLOWS = modTag("pillows");
-    public static final ITag.INamedTag<Block> STOOLS = modTag("stools");
+    public static final Tag.Named<Block> PILLOWS = modTag("pillows");
+    public static final Tag.Named<Block> STOOLS = modTag("stools");
 
-    private static ITag.INamedTag<Block> modTag(String name) {
+    private static Tag.Named<Block> modTag(String name) {
         return BlockTags.bind(TheComfortZone.resourceLoc(name).toString());
     }
 

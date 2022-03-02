@@ -31,6 +31,7 @@ public class TCZLangProvider extends LanguageProvider {
         this.addBlock(WHITE_PILLOW, "White Pillow");
         this.addBlock(YELLOW_PILLOW, "Yellow Pillow");
 
+        /*
         this.addBlock(BLACK_OAK_STOOL, "Black Oak Stool");
         this.addBlock(BLUE_OAK_STOOL, "Blue Oak Stool");
         this.addBlock(BROWN_OAK_STOOL, "Brown Oak Stool");
@@ -47,5 +48,7 @@ public class TCZLangProvider extends LanguageProvider {
         this.addBlock(RED_OAK_STOOL, "Red Oak Stool");
         this.addBlock(WHITE_OAK_STOOL, "White Oak Stool");
         this.addBlock(YELLOW_OAK_STOOL, "Yellow Oak Stool");
+
+         */
     }
 }

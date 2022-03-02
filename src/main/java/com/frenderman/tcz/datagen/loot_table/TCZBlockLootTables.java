@@ -1,15 +1,15 @@
 package com.frenderman.tcz.datagen.loot_table;
 
-import net.minecraft.block.Block;
-import net.minecraft.data.loot.BlockLootTables;
-import net.minecraft.loot.LootTable;
+import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTable;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static com.frenderman.tcz.common.core.register.TCZBlocks.*;
 
-public class TCZBlockLootTables extends BlockLootTables {
+public class TCZBlockLootTables extends BlockLoot {
 
     private final Set<Block> knownBlocks = new HashSet<>();
 
@@ -43,6 +43,7 @@ public class TCZBlockLootTables extends BlockLootTables {
         this.dropSelf(WHITE_PILLOW.get());
         this.dropSelf(YELLOW_PILLOW.get());
 
+        /*
         this.dropSelf(BLACK_OAK_STOOL.get());
         this.dropSelf(BLUE_OAK_STOOL.get());
         this.dropSelf(BROWN_OAK_STOOL.get());
@@ -59,5 +60,7 @@ public class TCZBlockLootTables extends BlockLootTables {
         this.dropSelf(RED_OAK_STOOL.get());
         this.dropSelf(WHITE_OAK_STOOL.get());
         this.dropSelf(YELLOW_OAK_STOOL.get());
+
+         */
     }
 }

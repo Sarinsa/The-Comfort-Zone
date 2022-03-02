@@ -5,14 +5,14 @@ import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleType;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Locale;
 
-public class PillowFeatherParticleData implements IParticleData {
+public class PillowFeatherParticleData implements ParticleOptions {
 
     public static void init() {}
 
@@ -20,7 +20,7 @@ public class PillowFeatherParticleData implements IParticleData {
             .create((dataInstance) -> dataInstance.group(Codec.DOUBLE.fieldOf("falldist")
                     .forGetter((particleData) -> particleData.fallDistance)).apply(dataInstance, PillowFeatherParticleData::new));
 
-    public static final IParticleData.IDeserializer<PillowFeatherParticleData> DESERIALIZER = new IParticleData.IDeserializer<PillowFeatherParticleData>() {
+    public static final ParticleOptions.Deserializer<PillowFeatherParticleData> DESERIALIZER = new ParticleOptions.Deserializer<>() {
 
         public PillowFeatherParticleData fromCommand(ParticleType<PillowFeatherParticleData> particleType, StringReader stringReader) throws CommandSyntaxException {
             stringReader.expect(' ');
@@ -28,8 +28,8 @@ public class PillowFeatherParticleData implements IParticleData {
             return new PillowFeatherParticleData(fallDist);
         }
 
-        public PillowFeatherParticleData fromNetwork(ParticleType<PillowFeatherParticleData> particleType, PacketBuffer packetBuffer) {
-            return new PillowFeatherParticleData(packetBuffer.readDouble());
+        public PillowFeatherParticleData fromNetwork(ParticleType<PillowFeatherParticleData> particleType, FriendlyByteBuf buffer) {
+            return new PillowFeatherParticleData(buffer.readDouble());
         }
     };
 
@@ -45,8 +45,8 @@ public class PillowFeatherParticleData implements IParticleData {
     }
 
     @Override
-    public void writeToNetwork(PacketBuffer packetBuffer) {
-        packetBuffer.writeDouble(this.fallDistance);
+    public void writeToNetwork(FriendlyByteBuf buffer) {
+        buffer.writeDouble(this.fallDistance);
     }
 
     @Override

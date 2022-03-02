@@ -3,11 +3,14 @@ package com.frenderman.tcz.datagen;
 import com.frenderman.tcz.common.core.TheComfortZone;
 import com.frenderman.tcz.common.core.register.TCZBlocks;
 import com.frenderman.tcz.common.tag.TCZItemTags;
-import net.minecraft.advancements.criterion.ItemPredicate;
-import net.minecraft.data.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
@@ -19,7 +22,7 @@ public class TCZRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
+    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
         this.shapedRecipe(TCZBlocks.WHITE_PILLOW.get(), 1)
                 .unlockedBy("has_feathers", has(Tags.Items.FEATHERS))
                 .pattern("##")
@@ -44,6 +47,7 @@ public class TCZRecipeProvider extends RecipeProvider {
         this.pillowRecipe(TCZBlocks.WHITE_PILLOW.get(), Tags.Items.DYES_WHITE, consumer);
         this.pillowRecipe(TCZBlocks.YELLOW_PILLOW.get(), Tags.Items.DYES_YELLOW, consumer);
 
+        /*
         this.stoolRecipe(TCZBlocks.BLACK_OAK_STOOL.get(), TCZBlocks.BLACK_PILLOW.get(), Items.OAK_SLAB, consumer);
         this.stoolRecipe(TCZBlocks.BLUE_OAK_STOOL.get(), TCZBlocks.BLUE_PILLOW.get(), Items.OAK_SLAB, consumer);
         this.stoolRecipe(TCZBlocks.BROWN_OAK_STOOL.get(), TCZBlocks.BROWN_PILLOW.get(), Items.OAK_SLAB, consumer);
@@ -60,13 +64,15 @@ public class TCZRecipeProvider extends RecipeProvider {
         this.stoolRecipe(TCZBlocks.RED_OAK_STOOL.get(), TCZBlocks.RED_PILLOW.get(), Items.OAK_SLAB, consumer);
         this.stoolRecipe(TCZBlocks.WHITE_OAK_STOOL.get(), TCZBlocks.WHITE_PILLOW.get(), Items.OAK_SLAB, consumer);
         this.stoolRecipe(TCZBlocks.YELLOW_OAK_STOOL.get(), TCZBlocks.YELLOW_PILLOW.get(), Items.OAK_SLAB, consumer);
+
+         */
     }
 
-    private ShapedRecipeBuilder shapedRecipe(IItemProvider result, int count) {
+    private ShapedRecipeBuilder shapedRecipe(ItemLike result, int count) {
         return ShapedRecipeBuilder.shaped(result, count);
     }
 
-    private void pillowRecipe(IItemProvider pillow, Tags.IOptionalNamedTag<Item> dye, Consumer<IFinishedRecipe> consumer) {
+    private void pillowRecipe(ItemLike pillow, Tags.IOptionalNamedTag<Item> dye, Consumer<FinishedRecipe> consumer) {
         ShapelessRecipeBuilder.shapeless(pillow, 1)
                 .group(TheComfortZone.resourceLoc("pillows").toString())
                 .requires(TCZItemTags.PILLOWS)
@@ -75,7 +81,7 @@ public class TCZRecipeProvider extends RecipeProvider {
                 .save(consumer);
     }
 
-    private void stoolRecipe(IItemProvider stool, IItemProvider pillow, IItemProvider slab, Consumer<IFinishedRecipe> consumer) {
+    private void stoolRecipe(ItemLike stool, ItemLike pillow, ItemLike slab, Consumer<FinishedRecipe> consumer) {
         shapedRecipe(stool, 1)
                 .group(TheComfortZone.resourceLoc("stools").toString())
                 .pattern("P")

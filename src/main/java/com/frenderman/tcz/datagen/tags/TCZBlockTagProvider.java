@@ -2,8 +2,8 @@ package com.frenderman.tcz.datagen.tags;
 
 import com.frenderman.tcz.common.core.TheComfortZone;
 import com.frenderman.tcz.common.tag.TCZBlockTags;
-import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
@@ -37,6 +37,7 @@ public class TCZBlockTagProvider extends BlockTagsProvider {
                 YELLOW_PILLOW.get()
         );
 
+        /*
         this.tag(TCZBlockTags.STOOLS).add(
                 BLACK_OAK_STOOL.get(),
                 BLUE_OAK_STOOL.get(),
@@ -55,6 +56,8 @@ public class TCZBlockTagProvider extends BlockTagsProvider {
                 WHITE_OAK_STOOL.get(),
                 YELLOW_OAK_STOOL.get()
         );
+
+         */
 
         this.tag(TCZBlockTags.SITTABLES).addTag(TCZBlockTags.PILLOWS);
         this.tag(TCZBlockTags.PILLOWS).addTag(TCZBlockTags.STOOLS);

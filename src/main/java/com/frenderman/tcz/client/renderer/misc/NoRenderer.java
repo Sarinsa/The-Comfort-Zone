@@ -1,25 +1,24 @@
 package com.frenderman.tcz.client.renderer.misc;
 
-import net.minecraft.client.renderer.culling.ClippingHelper;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 
 /**
- * Used for the rideable dummy entity which is used
- * for sitting on pillows and whatnot.
+ * Used for the rideable dummy entity.
  */
 public class NoRenderer<T extends Entity> extends EntityRenderer<T> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation("");
 
-    public NoRenderer(EntityRendererManager rendererManager) {
-        super(rendererManager);
+    public NoRenderer(EntityRendererProvider.Context context) {
+        super(context);
     }
 
     @Override
-    public boolean shouldRender(T entity, ClippingHelper clippingHelper, double x, double y, double z) {
+    public boolean shouldRender(T entity, Frustum clippingHelper, double x, double y, double z) {
         return false;
     }
 

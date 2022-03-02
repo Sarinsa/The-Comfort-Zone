@@ -1,13 +1,13 @@
 package com.frenderman.tcz.client.particle;
 
 import com.frenderman.tcz.common.core.register.TCZParticles;
-import net.minecraft.client.particle.IParticleFactory;
-import net.minecraft.client.particle.MetaParticle;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particles.BasicParticleType;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.core.particles.SimpleParticleType;
 
-public class PillowFeatherExplosionParticle extends MetaParticle {
+public class PillowFeatherExplosionParticle extends NoRenderParticle {
 
     private int timeSinceStart;
 
@@ -15,8 +15,8 @@ public class PillowFeatherExplosionParticle extends MetaParticle {
     private final double ySpeed;
     private final double zSpeed;
 
-    private PillowFeatherExplosionParticle(ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-        super(world, x, y, z, 0.0D, 0.0D, 0.0D);
+    private PillowFeatherExplosionParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        super(level, x, y, z, 0.0D, 0.0D, 0.0D);
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
         this.zSpeed = zSpeed;
@@ -35,10 +35,10 @@ public class PillowFeatherExplosionParticle extends MetaParticle {
         }
     }
 
-    public static class Factory implements IParticleFactory<BasicParticleType> {
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
 
-        public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new PillowFeatherExplosionParticle(world, x, y, z, xSpeed, ySpeed, zSpeed);
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            return new PillowFeatherExplosionParticle(level, x, y, z, xSpeed, ySpeed, zSpeed);
         }
     }
 }

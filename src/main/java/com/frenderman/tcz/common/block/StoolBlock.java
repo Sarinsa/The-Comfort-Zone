@@ -1,35 +1,14 @@
 package com.frenderman.tcz.common.block;
 
-import com.frenderman.tcz.common.core.register.TCZParticles;
-import com.frenderman.tcz.common.entity.RideableDummyEntity;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.world.level.block.Block;
 
-import java.util.List;
-
+/**
+ * The stool has been removed.
+ */
 public class StoolBlock extends Block {
+    public StoolBlock(Properties p_49795_) {
+        super(p_49795_);
+    } /*
 
     private static final VoxelShape SHAPE = VoxelShapes.or(
             Block.box(0.0D, 3.0D, 0.0D, 16.0D, 9.0D, 16.0D),
@@ -71,6 +50,7 @@ public class StoolBlock extends Block {
      * @return True if there are no rideable dummy entities
      *         at the given BlockPos.
      */
+    /*
     private boolean canSpawnRideable(World world, BlockPos pos) {
         AxisAlignedBB box = new AxisAlignedBB(pos);
         return world.getEntitiesOfClass(RideableDummyEntity.class, box).isEmpty();
@@ -149,4 +129,6 @@ public class StoolBlock extends Block {
         }
         return 0;
     }
+
+     */
 }
