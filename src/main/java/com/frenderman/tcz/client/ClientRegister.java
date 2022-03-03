@@ -25,7 +25,7 @@ public class ClientRegister {
     }
 
     @SubscribeEvent
-    private static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(TCZEntities.RIDEABLE_DUMMY_ENTITY.get(), NoRenderer::new);
     }
 

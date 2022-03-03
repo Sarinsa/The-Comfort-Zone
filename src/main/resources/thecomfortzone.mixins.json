@@ -5,8 +5,7 @@
   "minVersion": "0.8",
   "refmap": "thecomfortzone.mixins.refmap.json",
   "mixins": [
-    "CatEntityMixin",
-    "LivingEntityMixin"
+    "CatEntityMixin"
   ],
   "client": [],
   "server": [],

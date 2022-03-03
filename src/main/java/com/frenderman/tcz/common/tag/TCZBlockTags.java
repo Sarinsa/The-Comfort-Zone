@@ -10,7 +10,7 @@ public class TCZBlockTags {
     public static final Tag.Named<Block> SITTABLES = modTag("sittables");
 
     public static final Tag.Named<Block> PILLOWS = modTag("pillows");
-    public static final Tag.Named<Block> STOOLS = modTag("stools");
+    //public static final Tag.Named<Block> STOOLS = modTag("stools");
 
     private static Tag.Named<Block> modTag(String name) {
         return BlockTags.bind(TheComfortZone.resourceLoc(name).toString());

@@ -60,6 +60,6 @@ public class TCZBlockTagProvider extends BlockTagsProvider {
          */
 
         this.tag(TCZBlockTags.SITTABLES).addTag(TCZBlockTags.PILLOWS);
-        this.tag(TCZBlockTags.PILLOWS).addTag(TCZBlockTags.STOOLS);
+        //this.tag(TCZBlockTags.PILLOWS).addTag(TCZBlockTags.STOOLS);
     }
 }

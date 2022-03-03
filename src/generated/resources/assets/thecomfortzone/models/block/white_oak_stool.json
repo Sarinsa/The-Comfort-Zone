@@ -1,9 +1,0 @@
-{
-  "parent": "thecomfortzone:block/stool_template",
-  "textures": {
-    "side": "thecomfortzone:block/white_oak_stool_side",
-    "bottom": "thecomfortzone:block/oak_stool_bottom",
-    "top": "thecomfortzone:block/white_stool_top",
-    "planks": "minecraft:block/oak_planks"
-  }
-}

@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 public class TCZItemTags {
 
     public static final Tag.Named<Item> PILLOWS = modTag("pillows");
-    public static final Tag.Named<Item> STOOLS = modTag("stools");
+    //public static final Tag.Named<Item> STOOLS = modTag("stools");
 
     private static Tag.Named<Item> modTag(String name) {
         return ItemTags.bind(TheComfortZone.resourceLoc(name).toString());
