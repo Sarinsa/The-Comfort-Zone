@@ -2,6 +2,7 @@ package com.frenderman.tcz.common.core;
 
 import com.frenderman.tcz.common.core.config.TCZCommonConfig;
 import com.frenderman.tcz.common.core.register.*;
+import com.frenderman.tcz.common.event.ConfigEvents;
 import com.frenderman.tcz.common.event.EntityEvents;
 import com.frenderman.tcz.common.tag.TCZBlockTags;
 import net.minecraft.resources.ResourceLocation;
@@ -29,6 +30,7 @@ public class TheComfortZone {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         eventBus.addListener(this::onCommonSetup);
+        eventBus.register(new ConfigEvents());
 
         MinecraftForge.EVENT_BUS.register(new EntityEvents());
 

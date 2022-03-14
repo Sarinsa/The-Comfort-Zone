@@ -22,7 +22,7 @@ public class RideableDummyEntity extends Entity {
      * Used to mark that a passenger has dismounted
      * and that this entity should be removed.
      */
-    private boolean shouldBeRemoved;
+    private boolean dismounted;
 
     private double yDismountOffset;
 
@@ -38,7 +38,7 @@ public class RideableDummyEntity extends Entity {
         this(TCZEntities.RIDEABLE_DUMMY_ENTITY.get(), level);
         this.setPos(x, y, z);
         this.blocksBuilding = false;
-        this.shouldBeRemoved = false;
+        this.dismounted = false;
         this.gracePeriod = 10;
         this.yDismountOffset = yDismountOffset;
     }
@@ -48,7 +48,7 @@ public class RideableDummyEntity extends Entity {
         super.tick();
 
         if (!this.level.isClientSide) {
-            if ((this.getPassengers().isEmpty() && this.gracePeriod <= 0) || !this.validPosition() || this.shouldBeRemoved) {
+            if ((this.getPassengers().isEmpty() && this.gracePeriod <= 0) || !this.validPosition() || this.dismounted) {
                 this.discard();
             }
         }
@@ -87,7 +87,7 @@ public class RideableDummyEntity extends Entity {
     protected void removePassenger(Entity entity) {
         super.removePassenger(entity);
         this.updateNeighbour();
-        this.shouldBeRemoved = true;
+        this.dismounted = true;
     }
 
     @Override
