@@ -9,9 +9,7 @@ public class ConfigEvents {
 
     @SubscribeEvent
     public void onConfigReload(ModConfigEvent.Reloading event) {
-        final ModConfig config = event.getConfig();
-
-        if (config.getType() == ModConfig.Type.COMMON) {
+        if (event.getConfig().getType() == ModConfig.Type.COMMON) {
             refreshReferences();
         }
     }

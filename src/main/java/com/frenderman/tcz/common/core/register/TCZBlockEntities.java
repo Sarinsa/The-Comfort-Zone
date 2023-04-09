@@ -16,10 +16,10 @@ import java.util.function.Supplier;
 
 public class TCZBlockEntities {
 
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, TheComfortZone.MODID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, TheComfortZone.MODID);
 
 
-    public static final RegistryObject<BlockEntityType<TableBlockEntity>> TABLE = register("table", TableBlockEntity::new, () -> Arrays.asList(TCZBlocks.OAK_TABLE.get()));
+    public static final RegistryObject<BlockEntityType<TableBlockEntity>> TABLE = register("table", TableBlockEntity::new, () -> List.of(TCZBlocks.OAK_TABLE.get()));
 
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier, Supplier<List<Block>> validBlocks) {

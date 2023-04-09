@@ -18,7 +18,8 @@ public class TableBlockEntity extends BlockEntity {
         super(TCZBlockEntities.TABLE.get(), pos, state);
     }
 
-    public static void serverTick(Level level, BlockPos pos, BlockState state, TableBlockEntity tableBlockEntity) {
+
+    public static void tick(Level level, BlockPos pos, BlockState state, TableBlockEntity tableBlockEntity) {
 
     }
 

@@ -28,8 +28,8 @@ public class PillowFeatherImpactParticle extends NoRenderParticle {
 
         double fallDist = particleData.getFallDistance();
 
-        this.particleCount = Math.min(55, (int) (fallDist * 1.4));
-        this.runs = Math.min(4, (int) (fallDist * 0.3) + 1);
+        particleCount = Math.min(55, (int) (fallDist * 1.4));
+        runs = Math.min(4, (int) (fallDist * 0.3) + 1);
     }
 
     public void tick() {
@@ -37,11 +37,11 @@ public class PillowFeatherImpactParticle extends NoRenderParticle {
             double xSpeed = this.xSpeed != 0.0D ? this.zSpeed : (random.nextGaussian() * 10.0D);
             double ySpeed = this.ySpeed != 0.0D ? this.ySpeed : (random.nextGaussian() * 10.0D);
             double zSpeed = this.zSpeed != 0.0D ? this.zSpeed : (random.nextGaussian() * 10.0D);
-            this.level.addParticle(TCZParticles.PILLOW_FEATHER.get(), this.x, this.y, this.z, xSpeed, ySpeed, zSpeed);
+            level.addParticle(TCZParticles.PILLOW_FEATHER.get(), x, y, z, xSpeed, ySpeed, zSpeed);
         }
-        ++this.timeSinceStart;
-        if (this.timeSinceStart >= this.runs) {
-            this.remove();
+        ++timeSinceStart;
+        if (timeSinceStart >= runs) {
+            remove();
         }
     }
 

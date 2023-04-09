@@ -1,6 +1,5 @@
 package com.frenderman.tcz.common.block;
 
-
 import com.frenderman.tcz.common.core.register.TCZBlockEntities;
 import com.frenderman.tcz.common.tile.TableBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -46,7 +45,7 @@ public class TableBlock extends BaseEntityBlock {
 
     @Nullable
     protected static <T extends BlockEntity> BlockEntityTicker<T> createTableTicker(Level level, BlockEntityType<T> blockEntityTypeA, BlockEntityType<? extends TableBlockEntity> blockEntityTypeB) {
-        return level.isClientSide ? null : createTickerHelper(blockEntityTypeA, blockEntityTypeB, TableBlockEntity::serverTick);
+        return level.isClientSide ? null : createTickerHelper(blockEntityTypeA, blockEntityTypeB, TableBlockEntity::tick);
     }
 
     @Override

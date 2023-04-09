@@ -27,11 +27,11 @@ public class PillowFeatherExplosionParticle extends NoRenderParticle {
             double xSpeed = this.xSpeed != 0.0D ? this.zSpeed : (random.nextGaussian() * 10.0D);
             double ySpeed = this.ySpeed != 0.0D ? this.ySpeed : (random.nextGaussian() * 10.0D);
             double zSpeed = this.zSpeed != 0.0D ? this.zSpeed : (random.nextGaussian() * 10.0D);
-            this.level.addParticle(TCZParticles.PILLOW_FEATHER.get(), this.x, this.y, this.z, xSpeed, ySpeed, zSpeed);
+            level.addParticle(TCZParticles.PILLOW_FEATHER.get(), x, y, z, xSpeed, ySpeed, zSpeed);
         }
-        ++this.timeSinceStart;
-        if (this.timeSinceStart >= 5) {
-            this.remove();
+        ++timeSinceStart;
+        if (timeSinceStart >= 5) {
+            remove();
         }
     }
 

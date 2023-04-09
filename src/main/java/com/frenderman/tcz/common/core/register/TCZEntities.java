@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class TCZEntities {
 
-    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, TheComfortZone.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, TheComfortZone.MODID);
 
 
     public static final RegistryObject<EntityType<RideableDummyEntity>> RIDEABLE_DUMMY_ENTITY = register("rideable_dummy", EntityType.Builder.<RideableDummyEntity>of(RideableDummyEntity::new, MobCategory.MISC).sized(0.4F, 0.1F).noSummon().setShouldReceiveVelocityUpdates(false));

@@ -9,6 +9,7 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import static com.frenderman.tcz.common.core.register.TCZBlocks.*;
 
@@ -59,7 +60,7 @@ public class TCZBlockStateProvider extends BlockStateProvider {
     }
 
     private String name(Block block) {
-        return block.getRegistryName().getPath();
+        return ForgeRegistries.BLOCKS.getKey(block).getPath();
     }
 
     private ResourceLocation texture(String path) {
@@ -71,7 +72,8 @@ public class TCZBlockStateProvider extends BlockStateProvider {
     }
 
     private void pillowBlock(Block pillowBlock) {
-        String name = pillowBlock.getRegistryName().getPath();
+        String name = name(pillowBlock);
+
         ModelFile model = models().withExistingParent(name(pillowBlock), TheComfortZone.MODID + ":block/pillow")
                 .texture("side", texture(name))
                 .texture("bottom", texture(name + "_bottom"))
@@ -86,8 +88,8 @@ public class TCZBlockStateProvider extends BlockStateProvider {
 
     private void stoolBlock(Block stoolBlock, Block planks) {
         try {
-            String name = stoolBlock.getRegistryName().getPath();
-            String planksName = planks.getRegistryName().getPath();
+            String name = name(stoolBlock);
+            String planksName = name(planks);
             String plankWoodName = planksName.split("_")[0];
             String topName = name.split(plankWoodName)[0];
 

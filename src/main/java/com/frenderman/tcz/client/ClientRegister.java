@@ -11,7 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -30,11 +30,9 @@ public class ClientRegister {
     }
 
     @SubscribeEvent
-    public static void registerParticleFactories(ParticleFactoryRegisterEvent event) {
-        ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
-
-        particleEngine.register(TCZParticles.PILLOW_FEATHER.get(), PillowFeatherParticle.Provider::new);
-        particleEngine.register(TCZParticles.PILLOW_FEATHER_POOF.get(), new PillowFeatherExplosionParticle.Provider());
-        particleEngine.register(TCZParticles.PILLOW_FEATHER_IMPACT.get(), new PillowFeatherImpactParticle.Provider());
+    public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
+        event.register(TCZParticles.PILLOW_FEATHER.get(), PillowFeatherParticle.Provider::new);
+        event.register(TCZParticles.PILLOW_FEATHER_POOF.get(), new PillowFeatherExplosionParticle.Provider());
+        event.register(TCZParticles.PILLOW_FEATHER_IMPACT.get(), new PillowFeatherImpactParticle.Provider());
     }
 }

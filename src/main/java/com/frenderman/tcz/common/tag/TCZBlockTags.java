@@ -2,7 +2,6 @@ package com.frenderman.tcz.common.tag;
 
 import com.frenderman.tcz.common.core.TheComfortZone;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 

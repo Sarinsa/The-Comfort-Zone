@@ -68,8 +68,7 @@ public class PillowBlock extends Block {
      *         at the given BlockPos.
      */
     private boolean canSpawnRideable(Level level, BlockPos pos) {
-        AABB box = new AABB(pos);
-        return level.getEntitiesOfClass(RideableDummyEntity.class, box).isEmpty();
+        return level.getEntitiesOfClass(RideableDummyEntity.class, new AABB(pos)).isEmpty();
     }
 
     @Override
