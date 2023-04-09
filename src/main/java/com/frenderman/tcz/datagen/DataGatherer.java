@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = TheComfortZone.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGatherer {
 
+    
     @SubscribeEvent
     public static void onGatherData(GatherDataEvent event) {
         DataGenerator dataGen = event.getGenerator();
