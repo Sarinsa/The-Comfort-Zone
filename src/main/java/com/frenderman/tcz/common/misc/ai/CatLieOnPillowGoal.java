@@ -20,23 +20,23 @@ public class CatLieOnPillowGoal<T extends Cat> extends MoveToBlockGoal {
     public CatLieOnPillowGoal(T cat, double speed, int searchRange) {
         super(cat, speed, searchRange, 6);
         this.cat = cat;
-        this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
+        setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
     }
 
     private boolean isFarAwayFromOwner(T cat) {
         Entity owner = cat.getOwner();
-        return owner != null && this.cat.distanceToSqr(owner) > 100.0D;
+        return owner != null && cat.distanceToSqr(owner) > 100.0D;
     }
 
     @Override
     public boolean canUse() {
-        return this.cat.isTame() && !this.cat.isLying() && !this.isFarAwayFromOwner(this.cat) && super.canUse();
+        return cat.isTame() && !cat.isLying() && !isFarAwayFromOwner( cat) && super.canUse();
     }
 
     @Override
     public void start() {
         super.start();
-        this.cat.setInSittingPose(false);
+        cat.setInSittingPose(false);
     }
 
     @Override
@@ -47,27 +47,27 @@ public class CatLieOnPillowGoal<T extends Cat> extends MoveToBlockGoal {
     @Override
     public void stop() {
         super.stop();
-        this.cat.setLying(false);
+        cat.setLying(false);
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        this.cat.setInSittingPose(false);
+        cat.setInSittingPose(false);
 
-        if (!this.isReachedTarget() || this.isFarAwayFromOwner(this.cat)) {
-            this.cat.setLying(false);
+        if (!isReachedTarget() || isFarAwayFromOwner(cat)) {
+            cat.setLying(false);
         }
-        else if (!this.cat.isLying()) {
-            this.cat.setLying(true);
+        else if (!cat.isLying()) {
+            cat.setLying(true);
         }
     }
 
     @Override
     protected boolean isValidTarget(LevelReader levelReader, BlockPos pos) {
         if (levelReader instanceof Level level) {
-            boolean unoccupied = level.getEntities(this.cat, new AABB(pos)).isEmpty();
+            boolean unoccupied = level.getEntities(cat, new AABB(pos)).isEmpty();
             return level.isEmptyBlock(pos.above()) && level.getBlockState(pos).is(TCZBlockTags.PILLOWS) && unoccupied;
         }
         return false;

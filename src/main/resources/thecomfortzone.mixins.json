@@ -5,7 +5,8 @@
   "minVersion": "0.8",
   "refmap": "thecomfortzone.mixins.refmap.json",
   "mixins": [],
-  "client": [],
+  "client": [
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1

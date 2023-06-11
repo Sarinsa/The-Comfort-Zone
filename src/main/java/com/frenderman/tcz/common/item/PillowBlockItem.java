@@ -22,7 +22,6 @@ public class PillowBlockItem extends BlockItem {
 
     public PillowBlockItem(Block block, Properties properties) {
         super(block, properties);
-        refreshAttributeMod();
     }
 
     public static void refreshAttributeMod() {

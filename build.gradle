@@ -66,6 +66,20 @@ minecraft {
             }
         }
 
+        gameTestServer {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'thecomfortzone'
+
+            mods {
+                dampsoil {
+                    source sourceSets.main
+                }
+            }
+        }
+
         data {
             workingDirectory project.file('run')
 

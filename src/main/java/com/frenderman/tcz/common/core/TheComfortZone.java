@@ -4,6 +4,7 @@ import com.frenderman.tcz.common.core.config.TCZCommonConfig;
 import com.frenderman.tcz.common.core.register.*;
 import com.frenderman.tcz.common.event.ConfigEvents;
 import com.frenderman.tcz.common.event.EntityEvents;
+import com.frenderman.tcz.common.item.PillowBlockItem;
 import com.frenderman.tcz.common.tag.TCZBlockTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -45,7 +46,7 @@ public class TheComfortZone {
     }
 
     private void onCommonSetup(FMLCommonSetupEvent event) {
-
+        event.enqueueWork(PillowBlockItem::refreshAttributeMod);
     }
 
     public static ResourceLocation resourceLoc(String path) {
