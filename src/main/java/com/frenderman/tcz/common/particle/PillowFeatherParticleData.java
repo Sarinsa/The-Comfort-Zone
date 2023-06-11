@@ -14,8 +14,6 @@ import java.util.Locale;
 
 public class PillowFeatherParticleData implements ParticleOptions {
 
-    public static void init() {}
-
     public static final Codec<PillowFeatherParticleData> CODEC = RecordCodecBuilder
             .create((dataInstance) -> dataInstance.group(Codec.DOUBLE.fieldOf("falldist")
                     .forGetter((particleData) -> particleData.fallDistance)).apply(dataInstance, PillowFeatherParticleData::new));

@@ -16,7 +16,7 @@ import static com.frenderman.tcz.common.core.register.TCZBlocks.*;
 public class TCZBlockStateProvider extends BlockStateProvider {
 
     public TCZBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, TheComfortZone.MODID, exFileHelper);
+        super(gen.getPackOutput(), TheComfortZone.MODID, exFileHelper);
     }
 
     @Override

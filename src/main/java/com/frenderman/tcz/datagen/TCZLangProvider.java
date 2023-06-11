@@ -9,7 +9,7 @@ import static com.frenderman.tcz.common.core.register.TCZBlocks.*;
 public class TCZLangProvider extends LanguageProvider {
 
     public TCZLangProvider(DataGenerator gen) {
-        super(gen, TheComfortZone.MODID, "en_us");
+        super(gen.getPackOutput(), TheComfortZone.MODID, "en_us");
     }
 
     @Override

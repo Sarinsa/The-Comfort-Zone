@@ -30,6 +30,7 @@ public class TheComfortZone {
 
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        eventBus.addListener(TCZBlocks::onBuildCreativeTabs);
         eventBus.addListener(this::onCommonSetup);
         eventBus.register(new ConfigEvents());
 

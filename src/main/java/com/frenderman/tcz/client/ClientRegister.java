@@ -31,8 +31,8 @@ public class ClientRegister {
 
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
-        event.register(TCZParticles.PILLOW_FEATHER.get(), PillowFeatherParticle.Provider::new);
-        event.register(TCZParticles.PILLOW_FEATHER_POOF.get(), new PillowFeatherExplosionParticle.Provider());
-        event.register(TCZParticles.PILLOW_FEATHER_IMPACT.get(), new PillowFeatherImpactParticle.Provider());
+        event.registerSpriteSet(TCZParticles.PILLOW_FEATHER.get(), PillowFeatherParticle.Provider::new);
+        event.registerSpecial(TCZParticles.PILLOW_FEATHER_POOF.get(), new PillowFeatherExplosionParticle.Provider());
+        event.registerSpecial(TCZParticles.PILLOW_FEATHER_IMPACT.get(), new PillowFeatherImpactParticle.Provider());
     }
 }

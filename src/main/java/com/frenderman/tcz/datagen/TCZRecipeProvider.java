@@ -5,10 +5,7 @@ import com.frenderman.tcz.common.core.register.TCZBlocks;
 import com.frenderman.tcz.common.tag.TCZItemTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -19,11 +16,11 @@ import java.util.function.Consumer;
 public class TCZRecipeProvider extends RecipeProvider {
 
     public TCZRecipeProvider(DataGenerator dataGenerator) {
-        super(dataGenerator);
+        super(dataGenerator.getPackOutput());
     }
 
     @Override
-    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         this.shapedRecipe(TCZBlocks.WHITE_PILLOW.get(), 1)
                 .unlockedBy("has_feathers", has(Tags.Items.FEATHERS))
                 .pattern("##")
@@ -70,11 +67,11 @@ public class TCZRecipeProvider extends RecipeProvider {
     }
 
     private ShapedRecipeBuilder shapedRecipe(ItemLike result, int count) {
-        return ShapedRecipeBuilder.shaped(result, count);
+        return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result, count);
     }
 
     private void pillowRecipe(ItemLike pillow, TagKey<Item> dye, Consumer<FinishedRecipe> consumer) {
-        ShapelessRecipeBuilder.shapeless(pillow, 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, pillow, 1)
                 .group(TheComfortZone.resourceLoc("pillows").toString())
                 .requires(TCZItemTags.PILLOWS)
                 .requires(dye)

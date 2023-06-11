@@ -7,6 +7,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.Material;
 
 import javax.annotation.Nullable;
 
@@ -24,7 +24,8 @@ public class TableBlock extends BaseEntityBlock {
     public static final EnumProperty<TableType> TABLE_TYPE = EnumProperty.create("table_type", TableType.class);
 
     public TableBlock() {
-        super(BlockBehaviour.Properties.of(Material.WOOD)
+
+        super(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)
                 .sound(SoundType.WOOD)
                 .strength(2.0F, 3.0F)
                 .noOcclusion());

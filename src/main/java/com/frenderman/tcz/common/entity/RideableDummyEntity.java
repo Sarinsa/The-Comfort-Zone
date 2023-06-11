@@ -4,6 +4,7 @@ import com.frenderman.tcz.common.core.register.TCZEntities;
 import com.frenderman.tcz.common.tag.TCZBlockTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -47,7 +48,7 @@ public class RideableDummyEntity extends Entity {
     public void tick() {
         super.tick();
 
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             if ((this.getPassengers().isEmpty() && this.gracePeriod <= 0) || !this.validPosition() || this.dismounted) {
                 this.discard();
             }
@@ -65,7 +66,7 @@ public class RideableDummyEntity extends Entity {
     }
 
     private boolean validPosition() {
-        return this.level.getBlockState(this.blockPosition()).is(TCZBlockTags.SITTABLES);
+        return this.level().getBlockState(this.blockPosition()).is(TCZBlockTags.SITTABLES);
     }
 
     @Override
@@ -97,11 +98,11 @@ public class RideableDummyEntity extends Entity {
     }
 
     private void updateNeighbour() {
-        this.level.updateNeighbourForOutputSignal(this.blockPosition(), this.level.getBlockState(this.blockPosition()).getBlock());
+        this.level().updateNeighbourForOutputSignal(this.blockPosition(), this.level().getBlockState(this.blockPosition()).getBlock());
     }
 
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

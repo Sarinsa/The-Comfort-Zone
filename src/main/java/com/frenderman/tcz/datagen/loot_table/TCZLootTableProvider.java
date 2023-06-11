@@ -3,6 +3,7 @@ package com.frenderman.tcz.datagen.loot_table;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -18,21 +19,12 @@ import java.util.function.Supplier;
 
 public class TCZLootTableProvider extends LootTableProvider {
 
-    public TCZLootTableProvider(DataGenerator dataGenerator) {
-        super(dataGenerator);
+    public TCZLootTableProvider(PackOutput packOutput, List<SubProviderEntry> providers) {
+        super(packOutput, null, providers);
     }
 
     @Override
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-        ImmutableList.Builder<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> builder = new ImmutableList.Builder<>();
-
-        builder.add(Pair.of(TCZBlockLootTables::new, LootContextParamSets.BLOCK));
-
-        return builder.build();
-    }
-
-    @Override
-    protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationContext) {
-        // NOOP
+    protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext context) {
+        // No validation
     }
 }

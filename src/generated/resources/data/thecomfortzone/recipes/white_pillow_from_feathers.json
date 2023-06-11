@@ -1,15 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "##",
-    "##"
-  ],
+  "category": "misc",
   "key": {
     "#": {
       "tag": "forge:feathers"
     }
   },
+  "pattern": [
+    "##",
+    "##"
+  ],
   "result": {
     "item": "thecomfortzone:white_pillow"
-  }
+  },
+  "show_notification": true
 }

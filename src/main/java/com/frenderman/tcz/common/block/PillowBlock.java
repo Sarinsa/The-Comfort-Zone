@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -16,10 +17,10 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -34,7 +35,7 @@ public class PillowBlock extends Block {
     private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
 
     public PillowBlock() {
-        super(BlockBehaviour.Properties.of(Material.WOOL)
+        super(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL)
                 .sound(SoundType.WOOL)
                 .strength(0.4F, 0.1F));
     }
@@ -77,7 +78,7 @@ public class PillowBlock extends Block {
             super.fallOn(level, state, pos, entity, fallDistance);
         }
         else {
-            entity.causeFallDamage(fallDistance, 0.0F, DamageSource.FALL);
+            entity.causeFallDamage(fallDistance, 0.0F, entity.damageSources().fall());
         }
 
         if (fallDistance > 8.0F) {

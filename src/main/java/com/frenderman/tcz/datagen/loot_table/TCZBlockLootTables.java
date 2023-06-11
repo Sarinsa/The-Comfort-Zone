@@ -1,6 +1,8 @@
 package com.frenderman.tcz.datagen.loot_table;
 
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
 
@@ -9,9 +11,13 @@ import java.util.Set;
 
 import static com.frenderman.tcz.common.core.register.TCZBlocks.*;
 
-public class TCZBlockLootTables extends BlockLoot {
+public class TCZBlockLootTables extends BlockLootSubProvider {
 
     private final Set<Block> knownBlocks = new HashSet<>();
+
+    public TCZBlockLootTables(FeatureFlagSet flagSet) {
+        super(Set.of(), flagSet);
+    }
 
     @Override
     protected void add(Block block, LootTable.Builder table) {
@@ -25,7 +31,7 @@ public class TCZBlockLootTables extends BlockLoot {
     }
 
     @Override
-    public void addTables() {
+    public void generate() {
         this.dropSelf(BLACK_PILLOW.get());
         this.dropSelf(BLUE_PILLOW.get());
         this.dropSelf(BROWN_PILLOW.get());
