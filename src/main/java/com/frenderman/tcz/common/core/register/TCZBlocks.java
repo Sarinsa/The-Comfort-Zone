@@ -4,6 +4,7 @@ import com.frenderman.tcz.common.block.PillowBlock;
 import com.frenderman.tcz.common.block.TableBlock;
 import com.frenderman.tcz.common.core.TheComfortZone;
 import com.frenderman.tcz.common.item.PillowBlockItem;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -90,9 +91,15 @@ public class TCZBlocks {
     }
 
     public static void onBuildCreativeTabs(BuildCreativeModeTabContentsEvent event) {
-        if (CreativeModeTabRegistry.getName(event.getTab()) == CreativeModeTabs.COLORED_BLOCKS.location()
-                || CreativeModeTabRegistry.getName(event.getTab()) == CreativeModeTabs.BUILDING_BLOCKS.location()) {
+        ResourceLocation tabId = CreativeModeTabRegistry.getName(event.getTab());
+
+        if (tabId == CreativeModeTabs.COLORED_BLOCKS.location()
+                || tabId == CreativeModeTabs.BUILDING_BLOCKS.location()
+                || tabId == CreativeModeTabs.FUNCTIONAL_BLOCKS.location()
+        ) {
             PILLOWS.forEach(event::accept);
         }
+        if (tabId == CreativeModeTabs.REDSTONE_BLOCKS.location())
+            event.accept(WHITE_PILLOW);
     }
 }
